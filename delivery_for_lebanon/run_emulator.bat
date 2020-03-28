@@ -1,0 +1,1 @@
+flutter emulators --launch Pixel_2_API_28 • Pixel 2 API 28 • Google • android

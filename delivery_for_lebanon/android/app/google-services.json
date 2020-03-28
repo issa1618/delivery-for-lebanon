@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "253145726986",
+    "firebase_url": "https://delivery-for-lebanon.firebaseio.com",
+    "project_id": "delivery-for-lebanon",
+    "storage_bucket": "delivery-for-lebanon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253145726986:android:97bf080ac919aaad5b9ff3",
+        "android_client_info": {
+          "package_name": "com.example.delivery_for_lebanon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253145726986-ch0pglrih59dl1p75ir97dr60hjrt52f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhE1soEVUALGpiA9MaM-aboDMp55YeOG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253145726986-ch0pglrih59dl1p75ir97dr60hjrt52f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
