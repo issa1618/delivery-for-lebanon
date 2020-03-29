@@ -1,49 +1,37 @@
-import 'dart:convert';
-import 'package:geolocator/geolocator.dart';
 
 class Store {
   String name, ownerName, category, phone, address;
   List<double> location;
 
-  Store(this.name, this.ownerName, this.phone, this.category, this.location, this.address);
+  Store(this.name, this.ownerName, this.phone, this.category, this.location, [this.address]);
 
   // used by database auto populator only
   Store.fromList(List<String> lst) {
     name = lst[0];
-    phone = lst[1];
+    ownerName = lst[1];
+    phone = lst[2];
+    category = lst[3];
     location = [
-      double.parse(lst[2].split(",")[0]),
-      double.parse(lst[2].split(",")[1])
+      double.parse(lst[4].split(",")[0]),
+      double.parse(lst[4].split(",")[1])
     ];
   }
 
+  // create a Store object from a firebase's document snapshot
   Store.fromSnapshot(map) {
     name = map["name"];
+    ownerName = map["ownerName"];
     phone = map["phone"];
-    try {
-      location = [map["lat4"], map["lon4"]];
-    } catch (e) {
-      location = map["location"];
-    }
-    // lat4 and lon4 are latitude and longitude rounded to 4 decimals
-    Geolocator().placemarkFromCoordinates(map["lat4"], map["lon4"]).then((val) {
-      Placemark p = val[0];
-      address = "${p.administrativeArea}, ${p.locality}, ${p.name}";
-    });
+    category = map["category"];
+    location = [map["lat4"], map["lon4"]];  // lat4 and lon4 are latitude and longitude rounded to 4 decimals
   }
 
-  toJson() {
+  toFirebaseJSON() {
     return {
       "name": name,
+      "ownerName": ownerName,
       "phone": phone,
-      "location": location,
-    };
-  }
-
-  toFbJson() {
-    return {
-      "name": name,
-      "phone": phone,
+      "category": category,
       "lat0": num.parse(location[0].toStringAsFixed(0)),
       "lat1": num.parse(location[0].toStringAsFixed(1)),
       "lat2": num.parse(location[0].toStringAsFixed(2)),

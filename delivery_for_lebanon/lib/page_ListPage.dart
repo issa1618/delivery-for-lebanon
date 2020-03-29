@@ -20,7 +20,7 @@ class ListPageState extends State<ListPage> {
   bool loading = true;
 
   ListPageState(this.category) {
-    dbInstance.getStores(category).then((ret) {
+    dbInstance.getStores(category, "").then((ret) {
       if (ret.length == 0)
         nothingFound = true;
       else {
@@ -47,7 +47,7 @@ class ListPageState extends State<ListPage> {
             StoreList(newlst),
             nothingFound
                 ? Text(
-                    "لم يتم ايجاد اي محل في المنطقة",
+                    "لم يتم ايجاد محلّات",
                     textAlign: TextAlign.center,
                   )
                 : loading
@@ -70,9 +70,11 @@ class ListPageState extends State<ListPage> {
                       onPressed: () async {
                         loading = true;
                         setState(() {});
-                        newlst.addAll(await dbInstance.getStores(category));
+                        List<Store> more = await dbInstance.getStores(category, "load more");
+                        newlst.addAll(more);
                         loading = false;
-                        if (newlst.length == 0) nothingFound = true;
+                        if (more.length == 0)
+                          nothingFound = true;
                         setState(() {});
                       },
                     ),

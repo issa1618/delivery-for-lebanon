@@ -5,8 +5,9 @@ import 'page_IntroPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  // print("${position.latitude}, ${position.longitude}");
+  Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  print("${position.latitude}, ${position.longitude}");
+  userLocation = [position.latitude, position.longitude];
   runApp(App());
 }
 
@@ -16,6 +17,8 @@ class App extends StatelessWidget {
     return MaterialApp(home: IntroPage());
   }
 }
+
+List<double> userLocation;
 
 List<String> categories = [
   "أجبان و ألبان",

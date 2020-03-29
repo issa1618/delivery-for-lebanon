@@ -45,6 +45,7 @@ class FormPageState extends State<FormPage> {
             width: MediaQuery.of(context).size.width / 1.5,
             height: MediaQuery.of(context).size.height / 16,
             child: TextFormField(
+              expands: false,
               autocorrect: false,
               style: TextStyle(
                 color: Colors.black,
@@ -63,6 +64,7 @@ class FormPageState extends State<FormPage> {
             width: MediaQuery.of(context).size.width / 1.5,
             height: MediaQuery.of(context).size.height / 16,
             child: TextFormField(
+              expands: false,
               autocorrect: false,
               style: TextStyle(
                 color: Colors.black,
@@ -81,6 +83,7 @@ class FormPageState extends State<FormPage> {
             width: MediaQuery.of(context).size.width / 1.5,
             height: MediaQuery.of(context).size.height / 16,
             child: TextFormField(
+              expands: false,
               keyboardType: TextInputType.number,
               style: TextStyle(
                 color: Colors.black,
@@ -106,6 +109,7 @@ class FormPageState extends State<FormPage> {
                   width: MediaQuery.of(context).size.width / 3.1,
                   height: MediaQuery.of(context).size.height / 16,
                   child: TextFormField(
+                    expands: false,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -125,6 +129,7 @@ class FormPageState extends State<FormPage> {
                   width: MediaQuery.of(context).size.width / 3.2,
                   height: MediaQuery.of(context).size.height / 16,
                   child: TextFormField(
+                    expands: false,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -181,13 +186,13 @@ class FormPageState extends State<FormPage> {
                 } else if(category.isEmpty) {
                   snackBar("(الرجاء اختيار نوع المحل (ماذا يبيع");
                 } else {
+                  // print("${nameController.text}, ${ownerNameController.text}, ${phoneController.text}, ${[p.latitude, p.longitude]}, ${addressController1.text} ${addressController2.text}");
                   Store st = Store(
                     nameController.text,
                     ownerNameController.text,
                     phoneController.text,
                     category,
-                    [p.latitude, p.longitude],
-                    "${addressController1.text} ${addressController2.text}",
+                    [p.latitude, p.longitude]
                   );
                   String ret;
                   Navigator.push(context, MaterialPageRoute(builder: (context) => WaitPage("تتم اضافة المحل, الرجاء الانتظار")));
