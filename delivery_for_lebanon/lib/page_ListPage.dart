@@ -34,44 +34,48 @@ class ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("محلّات " + category, style: TextStyle(fontSize: 26),), centerTitle: true),
+      appBar: AppBar(
+          title: Text(
+            "محلّات " + category,
+            style: TextStyle(fontSize: 26),
+          ),
+          centerTitle: true),
       body: Center(
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: <Widget>[
+            StoreList(newlst),
             nothingFound
                 ? Text(
                     "لم يتم ايجاد اي محل في المنطقة",
                     textAlign: TextAlign.center,
                   )
-                : (loading
+                : loading
                     ? Center(child: CircularProgressIndicator())
-                    : StoreList(newlst)),
+                    : Container(),
             Center(
-              child: loading
+              child: loading || nothingFound
                   ? Container()
-                  : nothingFound
-                      ? Container()
-                      : FlatButton(
-                          child: Text(
-                            "بحث عن المزيد",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          color: Colors.blue,
-                          onPressed: () async {
-                            loading = true;
-                            setState(() {});
-                            newlst.addAll(await dbInstance.getStores(category));
-                            loading = false;
-                            if (newlst.length == 0) nothingFound = true;
-                            setState(() {});
-                          },
+                  : FlatButton(
+                      child: Text(
+                        "بحث عن المزيد",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () async {
+                        loading = true;
+                        setState(() {});
+                        newlst.addAll(await dbInstance.getStores(category));
+                        loading = false;
+                        if (newlst.length == 0) nothingFound = true;
+                        setState(() {});
+                      },
+                    ),
             ),
           ],
         ),
